@@ -1,17 +1,8 @@
-
-/* Tailwind directives */
 @import "tailwindcss";
 
-/* Import Nunito font */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
-
-/* ===== Light mode variables ===== */
+/* Playful, warm color palette for cat swiping app */
 :root {
-  /* Font */
-  --font-sans: "Nunito", "Nunito Fallback", ui-sans-serif, system-ui, sans-serif;
-
-  /* Colors */
-  --background: oklch(98.676% 0.01173 79.685);
+  --background: oklch(0.98 0.01 80);
   --foreground: oklch(0.25 0.02 50);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.25 0.02 50);
@@ -29,29 +20,57 @@
   --border: oklch(0.9 0.02 80);
   --input: oklch(0.92 0.01 80);
   --ring: oklch(0.65 0.2 25);
-
-  /* Radius */
   --radius: 0.625rem;
 }
 
-/* ===== Base styling ===== */
+.dark {
+  --background: oklch(0.18 0.02 50);
+  --foreground: oklch(0.95 0.01 80);
+  --card: oklch(0.22 0.02 50);
+  --card-foreground: oklch(0.95 0.01 80);
+  --popover: oklch(0.22 0.02 50);
+  --popover-foreground: oklch(0.95 0.01 80);
+  --primary: oklch(0.7 0.18 25);
+  --primary-foreground: oklch(0.15 0.02 50);
+  --secondary: oklch(0.65 0.12 170);
+  --secondary-foreground: oklch(0.15 0.02 50);
+  --muted: oklch(0.28 0.02 50);
+  --muted-foreground: oklch(0.65 0.02 80);
+  --accent: oklch(0.75 0.12 85);
+  --accent-foreground: oklch(0.15 0.02 50);
+  --destructive: oklch(0.396 0.141 25.723);
+  --border: oklch(0.32 0.02 50);
+  --input: oklch(0.28 0.02 50);
+  --ring: oklch(0.7 0.18 25);
+}
+
+@theme inline {
+  --font-sans: "Nunito", "Nunito Fallback", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
 @layer base {
   * {
-    box-sizing: border-box;
+    @apply border-border;
   }
-
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-sans);
-  }
-
-  button,
-  input,
-  select,
-  textarea {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-family: var(--font-sans);
+    @apply bg-background text-foreground;
   }
 }
