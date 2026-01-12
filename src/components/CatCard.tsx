@@ -104,7 +104,7 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
                 className="absolute top-8 left-8 px-4 py-2 border-4 border-primary bg-primary/20 rounded-lg rotate-[-15deg]"
                 style={{ opacity: nopeOpacity }}
               >
-                <span className="text-3xl font-bold text-primary">NOPE</span>
+                <span className="text-3xl font-bold text-primary">PASS</span>
               </motion.div>
             </>
           )}

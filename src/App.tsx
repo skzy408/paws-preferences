@@ -4,6 +4,7 @@ import { ResultsView } from "./components/ResultsView";
 import { LoadingScreen } from "./components/LoadingScreen";
 import "./index.css";
 import { Header } from "./components/Header";
+import { Progress } from "./components/ui/progress";
 
 interface CatImage {
   id: string;
@@ -86,17 +87,15 @@ function App() {
           </span>
           <span>{Math.round(((currentIndex) / cats.length) * 100)}%</span>
         </div>
-        <div className="h-2 bg-muted rounded-full overflow-hidden">
-          <div
-            className="h-full bg-primary transition-all duration-300 rounded-full"
-            style={{ width: `${((currentIndex ) / cats.length) * 100}%` }}
-          />
-        </div>
+        <Progress
+          value={((currentIndex + 1) / cats.length) * 100}
+          className="h-2"
+        />
       </div>
 
       {/* Instructions */}
-      <div className="text-center pb-4 px-4">
-        <p className="text-sm text-muted-foreground">
+      <div className="text-center pb-3">
+        <p className="text-base text-muted-foreground">
           Swipe <span className="text-primary font-semibold">left</span> to pass
           or <span className="text-secondary font-semibold">right</span> to like
         </p>
@@ -104,7 +103,7 @@ function App() {
 
       {/* Swipe Area */}
       <div className="flex-1 flex items-center justify-center px-4 pb-8">
-        <div className="relative w-full max-w-xs aspect-[3/4]">
+        <div className="relative w-full max-w-2xs aspect-[3/4]">
           {cats
             .slice(currentIndex, currentIndex + 3)
             .reverse()

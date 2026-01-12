@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import catIcon from "@/assets/cat.png";
 
 interface HeaderProps {
   likedCount: number;
@@ -11,7 +12,7 @@ export function Header({
   likedCount,
   title = "Paws & Preferences",
   subtitle = "Find your purr-fect match today!",
-  icon = "/cat.png"
+  icon = catIcon
 }: HeaderProps) {
   return (
     <header className="flex items-center justify-between px-6 py-4">
