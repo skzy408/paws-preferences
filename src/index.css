@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Playful, warm color palette for cat swiping app */
 :root {
   --background: oklch(0.98 0.01 80);
   --foreground: oklch(0.25 0.02 50);
