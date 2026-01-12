@@ -1,5 +1,5 @@
-import { motion } from "framer-motion"
-import { Cat } from "lucide-react"
+import { motion } from "framer-motion";
+import { Cat } from "lucide-react";
 
 export function LoadingScreen() {
   return (
@@ -7,20 +7,24 @@ export function LoadingScreen() {
       <motion.div
         animate={{
           scale: [1, 1.2, 1],
-          rotate: [0, 10, -10, 0],
+          rotate: [0, 10, -10, 0]
         }}
         transition={{
           duration: 1.5,
           repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
+          ease: "easeInOut"
         }}
         className="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-6 shadow-lg"
       >
         <Cat className="w-14 h-14 text-primary-foreground" />
       </motion.div>
 
-      <h1 className="text-2xl font-bold text-foreground mb-2">Paws & Preferences</h1>
-      <p className="text-muted-foreground mb-8">Finding adorable cats for you...</p>
+      <h1 className="text-2xl font-bold text-foreground mb-2">
+        Paws & Preferences
+      </h1>
+      <p className="text-muted-foreground mb-8">
+        Finding adorable cats for you...
+      </p>
 
       <div className="flex gap-2">
         {[0, 1, 2].map((i) => (
@@ -28,16 +32,16 @@ export function LoadingScreen() {
             key={i}
             className="w-3 h-3 rounded-full bg-secondary"
             animate={{
-              y: [0, -10, 0],
+              y: [0, -10, 0]
             }}
             transition={{
               duration: 0.6,
               repeat: Number.POSITIVE_INFINITY,
-              delay: i * 0.15,
+              delay: i * 0.15
             }}
           />
         ))}
       </div>
     </main>
-  )
+  );
 }

@@ -1,32 +1,29 @@
-import { motion } from "framer-motion"
-import { Heart, RotateCcw, Cat, PartyPopper } from "lucide-react"
+import { motion } from "framer-motion";
+import { Heart, RotateCcw, Cat, PartyPopper } from "lucide-react";
+import { Header } from "./Header";
 
 interface CatImage {
-  id: string
-  url: string
+  id: string;
+  url: string;
 }
 
 interface ResultsViewProps {
-  likedCats: CatImage[]
-  totalCats: number
-  onRestart: () => void
+  likedCats: CatImage[];
+  totalCats: number;
+  onRestart: () => void;
 }
 
-export function ResultsView({ likedCats, totalCats, onRestart }: ResultsViewProps) {
-  const percentage = Math.round((likedCats.length / totalCats) * 100)
+export function ResultsView({
+  likedCats,
+  totalCats,
+  onRestart
+}: ResultsViewProps) {
+  const percentage = Math.round((likedCats.length / totalCats) * 100);
 
   return (
     <main className="min-h-dvh flex flex-col bg-background">
       {/* Header */}
-      <header className="flex items-center justify-center px-6 py-4">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-            <Cat className="w-6 h-6 text-primary-foreground" />
-          </div>
-          <span className="font-bold text-xl text-foreground">Paws</span>
-        </div>
-      </header>
-
+      <Header likedCount={likedCats.length} />
       {/* Results Content */}
       <div className="flex-1 px-6 py-4 overflow-auto">
         {/* Stats Card */}
@@ -42,12 +39,16 @@ export function ResultsView({ likedCats, totalCats, onRestart }: ResultsViewProp
 
           <div className="flex items-center justify-center gap-8 mb-4">
             <div className="text-center">
-              <div className="text-4xl font-bold text-secondary">{likedCats.length}</div>
+              <div className="text-4xl font-bold text-secondary">
+                {likedCats.length}
+              </div>
               <div className="text-sm text-muted-foreground">Liked</div>
             </div>
             <div className="w-px h-12 bg-border" />
             <div className="text-center">
-              <div className="text-4xl font-bold text-foreground">{totalCats}</div>
+              <div className="text-4xl font-bold text-foreground">
+                {totalCats}
+              </div>
               <div className="text-sm text-muted-foreground">Total</div>
             </div>
           </div>
@@ -61,7 +62,9 @@ export function ResultsView({ likedCats, totalCats, onRestart }: ResultsViewProp
             />
           </div>
           <p className="text-center text-sm text-muted-foreground">
-            You liked <span className="font-semibold text-secondary">{percentage}%</span> of the cats!
+            You liked{" "}
+            <span className="font-semibold text-secondary">{percentage}%</span>{" "}
+            of the cats!
           </p>
         </motion.div>
 
@@ -70,7 +73,9 @@ export function ResultsView({ likedCats, totalCats, onRestart }: ResultsViewProp
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-4">
               <Heart className="w-5 h-5 text-secondary fill-secondary" />
-              <h2 className="text-lg font-semibold text-foreground">Your Favorites</h2>
+              <h2 className="text-lg font-semibold text-foreground">
+                Your Favorites
+              </h2>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {likedCats.map((cat, index) => (
@@ -94,12 +99,20 @@ export function ResultsView({ likedCats, totalCats, onRestart }: ResultsViewProp
         )}
 
         {likedCats.length === 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-8"
+          >
             <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
               <Cat className="w-10 h-10 text-muted-foreground" />
             </div>
-            <p className="text-muted-foreground">{"You didn't like any cats this time."}</p>
-            <p className="text-sm text-muted-foreground mt-1">Maybe try again?</p>
+            <p className="text-muted-foreground">
+              {"You didn't like any cats this time."}
+            </p>
+            <p className="text-sm text-muted-foreground mt-1">
+              Maybe try again?
+            </p>
           </motion.div>
         )}
       </div>
@@ -115,5 +128,5 @@ export function ResultsView({ likedCats, totalCats, onRestart }: ResultsViewProp
         </button>
       </div>
     </main>
-  )
+  );
 }

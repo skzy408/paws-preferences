@@ -1,44 +1,51 @@
-import { useState, useRef } from "react"
-import { motion, useMotionValue, useTransform, type PanInfo } from "framer-motion"
-import { Heart, X } from "lucide-react"
+import { useState, useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  type PanInfo
+} from "framer-motion";
+import { Heart, X } from "lucide-react";
 
 interface CatImage {
-  id: string
-  url: string
+  id: string;
+  url: string;
 }
 
 interface SwipeCardProps {
-  cat: CatImage
-  isTop: boolean
-  onSwipe: (direction: "left" | "right") => void
-  stackIndex: number
+  cat: CatImage;
+  isTop: boolean;
+  onSwipe: (direction: "left" | "right") => void;
+  stackIndex: number;
 }
 
 export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
-  const [exitDirection, setExitDirection] = useState<"left" | "right" | null>(null)
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
+  const [exitDirection, setExitDirection] = useState<"left" | "right" | null>(
+    null
+  );
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const x = useMotionValue(0)
-  const rotate = useTransform(x, [-200, 200], [-25, 25])
-  const likeOpacity = useTransform(x, [0, 100], [0, 1])
-  const nopeOpacity = useTransform(x, [-100, 0], [1, 0])
+  const x = useMotionValue(0);
+  const rotate = useTransform(x, [-200, 200], [-25, 25]);
+  const likeOpacity = useTransform(x, [0, 100], [0, 1]);
+  const nopeOpacity = useTransform(x, [-100, 0], [1, 0]);
 
   const handleDragEnd = (_: unknown, info: PanInfo) => {
-    const threshold = 100
+    const threshold = 100;
     if (info.offset.x > threshold) {
-      setExitDirection("right")
-      onSwipe("right")
+      setExitDirection("right");
+      onSwipe("right");
     } else if (info.offset.x < -threshold) {
-      setExitDirection("left")
-      onSwipe("left")
+      setExitDirection("left");
+      onSwipe("left");
     }
-  }
+  };
 
   const handleButtonSwipe = (direction: "left" | "right") => {
-    setExitDirection(direction)
-    onSwipe(direction)
-  }
+    setExitDirection(direction);
+    onSwipe(direction);
+  };
 
   return (
     <motion.div
@@ -49,7 +56,7 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
         rotate: isTop ? rotate : 0,
         scale: 1 - stackIndex * 0.05,
         y: stackIndex * 8,
-        zIndex: 10 - stackIndex,
+        zIndex: 10 - stackIndex
       }}
       drag={isTop ? "x" : false}
       dragConstraints={{ left: 0, right: 0 }}
@@ -60,7 +67,7 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
           ? {
               x: exitDirection === "right" ? 500 : -500,
               opacity: 0,
-              transition: { duration: 0.3 },
+              transition: { duration: 0.3 }
             }
           : {}
       }
@@ -76,7 +83,9 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
           <img
             src={cat.url || "/placeholder.svg"}
             alt="A cute cat"
-            className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
+              imageLoaded ? "opacity-100" : "opacity-0"
+            }`}
             onLoad={() => setImageLoaded(true)}
             crossOrigin="anonymous"
             draggable={false}
@@ -120,5 +129,5 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
