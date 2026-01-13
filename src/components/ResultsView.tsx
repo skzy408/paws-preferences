@@ -81,7 +81,7 @@ export function ResultsView({
             <div className="flex items-center gap-2 mb-4">
               <Heart className="w-5 h-5 text-secondary fill-secondary" />
               <h2 className="text-lg font-semibold text-foreground">
-                Your Favorites
+                Your Favourites
               </h2>
             </div>
             <div className="grid grid-cols-5 gap-3">

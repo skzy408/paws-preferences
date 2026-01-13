@@ -19,15 +19,15 @@ export function HelpDialog({ open, onOpenChange }: HelpDialogProps) {
         <DialogHeader>
           <DialogTitle>How to Play? 🐾</DialogTitle>
           <DialogDescription className="space-y-2 pt-2">
-            <p>
+            <p className="text-foreground">
               Swipe <span className="font-semibold text-primary">left</span> to
               pass a cat.
             </p>
-            <p>
+            <p className="text-foreground">
               Swipe <span className="font-semibold text-secondary">right</span>{" "}
               to like a cat.
             </p>
-            <p className="pt-2 text-sm text-muted-foreground">
+            <p className="pt-2 text-sm text-foreground">
               At the end, you’ll see all the cats you liked!
             </p>
           </DialogDescription>

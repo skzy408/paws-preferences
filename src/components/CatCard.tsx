@@ -82,9 +82,10 @@ export function CatCard({ cat, isTop, onSwipe, stackIndex }: CatCardProps) {
           : {}
       }
     >
-      <div className="w-full h-full bg-card rounded-3xl shadow-xl overflow-hidden border border-border">
+      <div className="w-full h-full bg-card rounded-3xl shadow-xl overflow-hidden border-2 border-border">
         {/* Image */}
         <div className="relative w-full h-full">
+          {/* Loading Spinner*/}
           {!imageLoaded && (
             <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
               <div className="w-16 h-16 rounded-full border-4 border-primary border-t-transparent animate-spin" />

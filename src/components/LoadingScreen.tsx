@@ -23,7 +23,7 @@ export function LoadingScreen() {
         />
       </motion.div>
 
-      <h1 className="text-4xl font-bold text-foreground mb-2">
+      <h1 className="text-4xl font-semibold text-foreground mb-2">
         PAWS & PREFERENCES
       </h1>
       <p className="text-muted-foreground mb-8">
