@@ -5,6 +5,7 @@ import { LoadingScreen } from "./components/LoadingScreen";
 import "./index.css";
 import { Header } from "./components/Header";
 import { Progress } from "./components/ui/progress";
+import { HelpDialog } from "./components/HelpDialog";
 
 interface CatImage {
   id: string;
@@ -18,6 +19,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
 
+  const [showHelp, setShowHelp] = useState(true);
+
   useEffect(() => {
     fetchCats();
   }, []);
@@ -26,7 +29,7 @@ function App() {
     setIsLoading(true);
     try {
       const catImages: CatImage[] = [];
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 20; i++) {
         const id = `cat-${Date.now()}-${i}`;
         catImages.push({
           id,
@@ -76,8 +79,11 @@ function App() {
 
   return (
     <main className="min-h-dvh flex flex-col bg-background">
+      {/* Help Dialog */}
+      <HelpDialog open={showHelp} onOpenChange={setShowHelp}/>
+
       {/* Header */}
-      <Header likedCount={likedCats.length}/>
+      <Header likedCount={likedCats.length} onHelpClick={() => setShowHelp(true)}/>
 
       {/* Progress */}
       <div className="px-8 mb-6">
@@ -91,14 +97,6 @@ function App() {
           value={((currentIndex + 1) / cats.length) * 100}
           className="h-2"
         />
-      </div>
-
-      {/* Instructions */}
-      <div className="text-center pb-3">
-        <p className="text-base text-muted-foreground">
-          Swipe <span className="text-primary font-semibold">left</span> to pass
-          or <span className="text-secondary font-semibold">right</span> to like
-        </p>
       </div>
 
       {/* Swipe Area */}

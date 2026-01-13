@@ -1,11 +1,14 @@
+"use client";
+
 import { useState, useRef } from "react";
 import {
   motion,
   useMotionValue,
   useTransform,
+  AnimatePresence,
   type PanInfo
 } from "framer-motion";
-import { Heart, X } from "lucide-react";
+import { Heart, X, HeartCrack } from "lucide-react";
 
 interface CatImage {
   id: string;
@@ -24,27 +27,34 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
     null
   );
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [showSwipeAnimation, setShowSwipeAnimation] = useState<
+    "like" | "dislike" | null
+  >(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-25, 25]);
-  const likeOpacity = useTransform(x, [0, 100], [0, 1]);
-  const nopeOpacity = useTransform(x, [-100, 0], [1, 0]);
+
+  const triggerSwipe = (direction: "left" | "right") => {
+    setShowSwipeAnimation(direction === "right" ? "like" : "dislike");
+
+    setTimeout(() => {
+      setExitDirection(direction);
+      onSwipe(direction);
+    }, 400);
+  };
 
   const handleDragEnd = (_: unknown, info: PanInfo) => {
     const threshold = 100;
     if (info.offset.x > threshold) {
-      setExitDirection("right");
-      onSwipe("right");
+      triggerSwipe("right");
     } else if (info.offset.x < -threshold) {
-      setExitDirection("left");
-      onSwipe("left");
+      triggerSwipe("left");
     }
   };
 
   const handleButtonSwipe = (direction: "left" | "right") => {
-    setExitDirection(direction);
-    onSwipe(direction);
+    triggerSwipe(direction);
   };
 
   return (
@@ -58,7 +68,7 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
         y: stackIndex * 8,
         zIndex: 10 - stackIndex
       }}
-      drag={isTop ? "x" : false}
+      drag={isTop && !showSwipeAnimation ? "x" : false}
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.9}
       onDragEnd={isTop ? handleDragEnd : undefined}
@@ -91,36 +101,54 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
             draggable={false}
           />
 
-          {/* Like/Nope Overlays */}
-          {isTop && (
-            <>
+          <AnimatePresence>
+            {showSwipeAnimation && (
               <motion.div
-                className="absolute top-8 right-8 px-4 py-2 border-4 border-secondary bg-secondary/20 rounded-lg rotate-[15deg]"
-                style={{ opacity: likeOpacity }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
               >
-                <span className="text-3xl font-bold text-secondary">LIKE</span>
+                <motion.div
+                  initial={{ scale: 0, rotate: -20 }}
+                  animate={{
+                    scale: [0, 1.4, 1.2],
+                    rotate: [0, 10, 0]
+                  }}
+                  transition={{
+                    duration: 0.4,
+                    ease: "easeOut"
+                  }}
+                  className={`p-6 rounded-full ${
+                    showSwipeAnimation === "like"
+                      ? "bg-secondary/90"
+                      : "bg-primary/90"
+                  } shadow-2xl`}
+                >
+                  {showSwipeAnimation === "like" ? (
+                    <Heart className="w-8 h-8 text-white fill-white" />
+                  ) : (
+                    <HeartCrack className="w-8 h-8 text-white" />
+                  )}
+                </motion.div>
               </motion.div>
-              <motion.div
-                className="absolute top-8 left-8 px-4 py-2 border-4 border-primary bg-primary/20 rounded-lg rotate-[-15deg]"
-                style={{ opacity: nopeOpacity }}
-              >
-                <span className="text-3xl font-bold text-primary">PASS</span>
-              </motion.div>
-            </>
-          )}
+            )}
+          </AnimatePresence>
 
           {/* Action Buttons */}
           {isTop && (
             <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-8">
               <button
                 onClick={() => handleButtonSwipe("left")}
-                className="w-16 h-16 rounded-full bg-card shadow-lg flex items-center justify-center border-2 border-primary hover:scale-110 transition-transform active:scale-95"
+                disabled={!!showSwipeAnimation}
+                className="w-16 h-16 rounded-full bg-card shadow-lg flex items-center justify-center border-2 border-primary hover:scale-110 transition-transform active:scale-95 disabled:opacity-50"
               >
                 <X className="w-8 h-8 text-primary" />
               </button>
               <button
                 onClick={() => handleButtonSwipe("right")}
-                className="w-16 h-16 rounded-full bg-card shadow-lg flex items-center justify-center border-2 border-secondary hover:scale-110 transition-transform active:scale-95"
+                disabled={!!showSwipeAnimation}
+                className="w-16 h-16 rounded-full bg-card shadow-lg flex items-center justify-center border-2 border-secondary hover:scale-110 transition-transform active:scale-95 disabled:opacity-50"
               >
                 <Heart className="w-8 h-8 text-secondary" />
               </button>

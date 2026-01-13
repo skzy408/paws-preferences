@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Cat } from "lucide-react";
+import catIcon from "@/assets/cat.png";
 
 export function LoadingScreen() {
   return (
@@ -17,6 +18,11 @@ export function LoadingScreen() {
         className="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-6 shadow-lg"
       >
         <Cat className="w-14 h-14 text-primary-foreground" />
+        <img
+            src={catIcon}
+            alt="Cat logo"
+            className="w-14 h-14 object-contain pl-2"
+          />
       </motion.div>
 
       <h1 className="text-2xl font-bold text-foreground mb-2">
