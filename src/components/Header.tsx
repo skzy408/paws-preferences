@@ -1,5 +1,3 @@
-"use client";
-
 import { Heart, CircleHelp, Cat } from "lucide-react";
 
 interface HeaderProps {
