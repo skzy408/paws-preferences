@@ -34,8 +34,6 @@ export function CatCard({ cat, isTop, onSwipe, stackIndex }: CatCardProps) {
 
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-25, 25]);
-  const likeOpacity = useTransform(x, [0, 100], [0, 1]);
-  const nopeOpacity = useTransform(x, [-100, 0], [1, 0]);
 
   const triggerSwipe = (direction: "left" | "right") => {
     setShowSwipeAnimation(direction === "right" ? "like" : "dislike");
