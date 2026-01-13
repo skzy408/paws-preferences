@@ -23,12 +23,14 @@ export function LoadingScreen() {
         />
       </motion.div>
 
-      <h1 className="text-4xl font-semibold text-foreground mb-2">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground mb-2 text-center">
         PAWS & PREFERENCES
       </h1>
-      <p className="text-muted-foreground mb-8">
+
+      <p className="text-sm sm:text-base text-muted-foreground mb-8 text-center">
         Finding adorable cats for you...
       </p>
+
 
       <div className="flex gap-2">
         {[0, 1, 2].map((i) => (
