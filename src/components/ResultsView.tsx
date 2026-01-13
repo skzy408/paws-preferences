@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Heart, RotateCcw, Cat, PartyPopper } from "lucide-react";
 import { Header } from "./Header";
+import { useState } from "react";
+import { HelpDialog } from "./HelpDialog";
 
 interface CatImage {
   id: string;
@@ -18,12 +20,16 @@ export function ResultsView({
   totalCats,
   onRestart
 }: ResultsViewProps) {
+  const [showHelp, setShowHelp] = useState(false);
   const percentage = Math.round((likedCats.length / totalCats) * 100);
 
   return (
     <main className="min-h-dvh flex flex-col bg-background">
+      {/* Help Dialog */}
+      <HelpDialog open={showHelp} onOpenChange={setShowHelp}/>
+
       {/* Header */}
-      <Header likedCount={likedCats.length} />
+      <Header likedCount={likedCats.length} onHelpClick={() => setShowHelp(true)}/>
       {/* Results Content */}
       <div className="flex-1 px-6 py-4 overflow-auto">
         {/* Stats Card */}
@@ -33,8 +39,8 @@ export function ResultsView({
           className="bg-card rounded-3xl p-6 shadow-lg border border-border mb-6"
         >
           <div className="flex items-center justify-center gap-2 mb-4">
-            <PartyPopper className="w-6 h-6 text-accent" />
-            <h1 className="text-2xl font-bold text-foreground">All Done!</h1>
+            <PartyPopper className="w-6 h-6 text-primary" />
+            <h1 className="text-3xl font-semibold text-foreground">All Done !</h1>
           </div>
 
           <div className="flex items-center justify-center gap-8 mb-4">
@@ -53,7 +59,7 @@ export function ResultsView({
             </div>
           </div>
 
-          <div className="bg-muted rounded-full h-4 overflow-hidden mb-2">
+          <div className="bg-muted rounded-full h-3 overflow-hidden mb-2">
             <motion.div
               className="h-full bg-secondary"
               initial={{ width: 0 }}
@@ -61,6 +67,7 @@ export function ResultsView({
               transition={{ duration: 0.8, ease: "easeOut" }}
             />
           </div>
+
           <p className="text-center text-sm text-muted-foreground">
             You liked{" "}
             <span className="font-semibold text-secondary">{percentage}%</span>{" "}
@@ -77,7 +84,7 @@ export function ResultsView({
                 Your Favorites
               </h2>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-5 gap-3">
               {likedCats.map((cat, index) => (
                 <motion.div
                   key={cat.id}
@@ -121,7 +128,7 @@ export function ResultsView({
       <div className="px-6 pb-8 pt-4">
         <button
           onClick={onRestart}
-          className="w-full h-14 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg shadow-lg flex items-center justify-center gap-2 transition-colors"
+          className="w-full h-12 rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base shadow-lg flex items-center justify-center gap-2 transition-colors"
         >
           <RotateCcw className="w-5 h-5" />
           Find More Cats

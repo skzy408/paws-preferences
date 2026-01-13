@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SwipeCard } from "./components/CatCard";
+import { CatCard } from "./components/CatCard";
 import { ResultsView } from "./components/ResultsView";
 import { LoadingScreen } from "./components/LoadingScreen";
 import "./index.css";
@@ -19,23 +19,31 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
 
-  const [showHelp, setShowHelp] = useState(true);
+  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     fetchCats();
+
+    const timer = setTimeout(() => {
+      setShowHelp(true);
+    }, 3500);
+    return () => clearTimeout(timer); 
   }, []);
 
   const fetchCats = async () => {
     setIsLoading(true);
     try {
       const catImages: CatImage[] = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 10; i++) {
         const id = `cat-${Date.now()}-${i}`;
         catImages.push({
           id,
           url: `https://cataas.com/cat?timestamp=${id}`
         });
       }
+
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       setCats(catImages);
     } catch (error) {
       console.error("Failed to fetch cats:", error);
@@ -106,7 +114,7 @@ function App() {
             .slice(currentIndex, currentIndex + 3)
             .reverse()
             .map((cat, index) => (
-              <SwipeCard
+              <CatCard
                 key={cat.id}
                 cat={cat}
                 isTop={

@@ -15,14 +15,14 @@ interface CatImage {
   url: string;
 }
 
-interface SwipeCardProps {
+interface CatCardProps {
   cat: CatImage;
   isTop: boolean;
   onSwipe: (direction: "left" | "right") => void;
   stackIndex: number;
 }
 
-export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
+export function CatCard({ cat, isTop, onSwipe, stackIndex }: CatCardProps) {
   const [exitDirection, setExitDirection] = useState<"left" | "right" | null>(
     null
   );
@@ -101,6 +101,7 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
             draggable={false}
           />
 
+          {/* Heart/Broken Heart Animations */}
           <AnimatePresence>
             {showSwipeAnimation && (
               <motion.div
@@ -119,7 +120,7 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
                     duration: 0.4,
                     ease: "easeOut"
                   }}
-                  className={`p-6 rounded-full ${
+                  className={`p-3 rounded-full ${
                     showSwipeAnimation === "like"
                       ? "bg-secondary/90"
                       : "bg-primary/90"
@@ -135,20 +136,20 @@ export function SwipeCard({ cat, isTop, onSwipe, stackIndex }: SwipeCardProps) {
             )}
           </AnimatePresence>
 
-          {/* Action Buttons */}
+          {/* Action Buttons (Alternative to Swiping) */}
           {isTop && (
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-8">
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-8">
               <button
                 onClick={() => handleButtonSwipe("left")}
                 disabled={!!showSwipeAnimation}
-                className="w-16 h-16 rounded-full bg-card shadow-lg flex items-center justify-center border-2 border-primary hover:scale-110 transition-transform active:scale-95 disabled:opacity-50"
+                className="w-14 h-14 rounded-full bg-card shadow-lg flex items-center justify-center border-2 border-primary hover:scale-110 transition-transform active:scale-95 disabled:opacity-50"
               >
                 <X className="w-8 h-8 text-primary" />
               </button>
               <button
                 onClick={() => handleButtonSwipe("right")}
                 disabled={!!showSwipeAnimation}
-                className="w-16 h-16 rounded-full bg-card shadow-lg flex items-center justify-center border-2 border-secondary hover:scale-110 transition-transform active:scale-95 disabled:opacity-50"
+                className="w-14 h-14 rounded-full bg-card shadow-lg flex items-center justify-center border-2 border-secondary hover:scale-110 transition-transform active:scale-95 disabled:opacity-50"
               >
                 <Heart className="w-8 h-8 text-secondary" />
               </button>

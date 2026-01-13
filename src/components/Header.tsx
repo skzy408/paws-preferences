@@ -1,6 +1,5 @@
 import { Heart, CircleQuestionMark } from "lucide-react";
 import catIcon from "@/assets/cat.png";
-import { useState } from "react";
 
 interface HeaderProps {
   likedCount: number;
@@ -12,13 +11,11 @@ interface HeaderProps {
 
 export function Header({
   likedCount,
-  title = "Paws & Preferences",
+  title = "PAWS & PREFERENCES",
   subtitle = "Find your purr-fect match today!",
   icon = catIcon,
   onHelpClick
 }: HeaderProps) {
-  const [showHelp, setShowHelp] = useState(false);
-
   return (
     <header className="flex items-center justify-between px-6 py-4">
       <div className="flex items-center gap-2">
@@ -30,14 +27,14 @@ export function Header({
           />
         </div>
         <div className="flex flex-col leading-tight pl-3">
-          <span className="font-bold text-3xl text-foreground">{title}</span>
-          <span className="text-sm text-muted-foreground">{subtitle}</span>
+          <h1 className="font-semibold text-4xl text-foreground">{title}</h1>
+          <span className="text-base text-muted-foreground mt-1">{subtitle}</span>
         </div>
       </div>
 
       <div className="flex items-center gap-3">
         <CircleQuestionMark
-          className="size-8 rounded-full p-1 text-foreground/80 hover:bg-primary/60"
+          className="size-6 rounded-full text-foreground/80 hover:bg-foreground/20"
           onClick={onHelpClick}
         />
 

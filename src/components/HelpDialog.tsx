@@ -17,7 +17,7 @@ export function HelpDialog({ open, onOpenChange }: HelpDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[420px]">
         <DialogHeader>
-          <DialogTitle>How it works 🐾</DialogTitle>
+          <DialogTitle>How to Play? 🐾</DialogTitle>
           <DialogDescription className="space-y-2 pt-2">
             <p>
               Swipe <span className="font-semibold text-primary">left</span> to

@@ -45,6 +45,7 @@
 
 @theme inline {
   --font-sans: "Nunito", "Nunito Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-secondary: "Fredoka", ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -73,4 +74,13 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  h1, h2, h3 {
+    font-family: var(--font-secondary);
+  }
+
+  p, span, div {
+    font-family: var(--font-sans);
+  }
 }
+

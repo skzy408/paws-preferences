@@ -32,6 +32,7 @@ export default {
       },
       fontFamily: {
         sans: 'var(--font-sans)',
+        secondary: 'var(--font-secondary)'
       },
     },
   },

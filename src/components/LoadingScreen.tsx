@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Cat } from "lucide-react";
 import catIcon from "@/assets/cat.png";
 
 export function LoadingScreen() {
@@ -17,16 +16,15 @@ export function LoadingScreen() {
         }}
         className="w-24 h-24 rounded-full bg-primary flex items-center justify-center mb-6 shadow-lg"
       >
-        <Cat className="w-14 h-14 text-primary-foreground" />
         <img
-            src={catIcon}
-            alt="Cat logo"
-            className="w-14 h-14 object-contain pl-2"
-          />
+          src={catIcon}
+          alt="Cat logo"
+          className="w-14 h-14 object-contain pl-2"
+        />
       </motion.div>
 
-      <h1 className="text-2xl font-bold text-foreground mb-2">
-        Paws & Preferences
+      <h1 className="text-4xl font-bold text-foreground mb-2">
+        PAWS & PREFERENCES
       </h1>
       <p className="text-muted-foreground mb-8">
         Finding adorable cats for you...
@@ -36,7 +34,7 @@ export function LoadingScreen() {
         {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
-            className="w-3 h-3 rounded-full bg-secondary"
+            className="w-3 h-3 rounded-full bg-primary"
             animate={{
               y: [0, -10, 0]
             }}
