@@ -27,6 +27,15 @@ export function HelpDialog({ open, onOpenChange }: HelpDialogProps) {
               Swipe <span className="font-semibold text-secondary">right</span>{" "}
               to like a cat.
             </p>
+            <p className="text-foreground">
+              Click the <span className="font-bold text-accent">undo</span>{" "}
+              button to undo your last swipe.
+            </p>
+            <p className="text-foreground">
+              Click the <span className="font-bold text-accent">moon/sun</span>{" "}
+              button to toggle dark/light mode.
+            </p>
+            
             <p className="pt-2 text-sm text-foreground">
               At the end, you’ll see all the cats you liked!
             </p>

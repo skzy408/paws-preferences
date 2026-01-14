@@ -184,7 +184,7 @@ function App() {
 
       {/* Swipe Area */}
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 pb-6 sm:pb-8">
-        <div className="relative w-full max-w-[280px] sm:max-w-xs md:max-w-sm aspect-[3/4]">
+        <div className="relative w-full max-w-[280px] sm:max-w-xs md:max-w-xs aspect-[3/4]">
           {cats
             .slice(currentIndex, currentIndex + 3)
             .reverse()
