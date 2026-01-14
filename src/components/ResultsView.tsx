@@ -1,8 +1,14 @@
 import { motion } from "framer-motion";
-import { Heart, RotateCcw, Cat, PartyPopper } from "lucide-react";
-import { Header } from "./Header";
+import {
+  Heart,
+  RotateCcw,
+  Cat,
+  PartyPopper,
+  Undo2,
+} from "lucide-react";
 import { useState } from "react";
 import { HelpDialog } from "./HelpDialog";
+import { Header } from "./Header";
 
 interface CatImage {
   id: string;
@@ -13,12 +19,18 @@ interface ResultsViewProps {
   likedCats: CatImage[];
   totalCats: number;
   onRestart: () => void;
+  onUndo?: () => void;
+  isDarkMode?: boolean;
+  onToggleDarkMode?: () => void;
 }
 
 export function ResultsView({
   likedCats,
   totalCats,
-  onRestart
+  onRestart,
+  onUndo,
+  isDarkMode,
+  onToggleDarkMode
 }: ResultsViewProps) {
   const [showHelp, setShowHelp] = useState(false);
   const percentage = Math.round((likedCats.length / totalCats) * 100);
@@ -28,10 +40,13 @@ export function ResultsView({
       {/* Help Dialog */}
       <HelpDialog open={showHelp} onOpenChange={setShowHelp} />
 
-      {/* Header */}
       <Header
         likedCount={likedCats.length}
         onHelpClick={() => setShowHelp(true)}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={onToggleDarkMode}
+        // canUndo={canUndo}
+        onUndo={onUndo}
       />
 
       {/* Results Content */}
@@ -134,11 +149,20 @@ export function ResultsView({
         )}
       </div>
 
-      {/* Restart Button */}
-      <div className="px-4 sm:px-6 pb-6 sm:pb-8 pt-3 sm:pt-4">
+      <div className="px-4 sm:px-6 pb-6 sm:pb-8 pt-3 sm:pt-4 flex gap-3">
+        {onUndo && (
+          <button
+            onClick={onUndo}
+            className="h-12 sm:h-14 px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-muted hover:bg-muted/80 active:scale-[0.98] text-foreground font-semibold text-base sm:text-lg shadow-md flex items-center justify-center gap-2 transition-all"
+            aria-label="Undo last swipe and go back"
+          >
+            <Undo2 className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">Undo</span>
+          </button>
+        )}
         <button
           onClick={onRestart}
-          className="w-full h-12 sm:h-14 rounded-xl sm:rounded-2xl bg-primary hover:bg-primary/90 active:scale-[0.98] text-primary-foreground font-semibold text-base sm:text-lg shadow-lg flex items-center justify-center gap-2 transition-all"
+          className="flex-1 h-12 sm:h-14 rounded-xl sm:rounded-2xl bg-primary hover:bg-primary/90 active:scale-[0.98] text-primary-foreground font-semibold text-base sm:text-lg shadow-lg flex items-center justify-center gap-2 transition-all"
         >
           <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
           Find More Cats
