@@ -26,13 +26,13 @@ export function Header({
     <header className="flex items-center justify-between px-3 sm:px-4 md:px-6 py-3 sm:py-4">
       <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
         <div className="w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-          <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center">
+          <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-primary flex items-center justify-center">
             <img
               src={catIcon}
               alt="Cat logo"
-              className="w-12 h-12 object-contain pl-2"
+              className="w-8 h-8 sm:w-12 sm:h-12 object-contain pl-1 sm:pl-2"
             />
-          </div>{" "}
+          </div>
         </div>
         <div className="flex flex-col leading-tight min-w-0">
           <h1 className="font-bold text-base sm:text-xl md:text-2xl lg:text-3xl text-foreground break-words">
