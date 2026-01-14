@@ -1,4 +1,5 @@
-import { Heart, CircleHelp, Cat, Undo2, Moon, Sun } from "lucide-react";
+import { Heart, CircleHelp, Undo2, Moon, Sun } from "lucide-react";
+import catIcon from "@/assets/cat.png";
 
 interface HeaderProps {
   likedCount: number;
@@ -25,7 +26,13 @@ export function Header({
     <header className="flex items-center justify-between px-3 sm:px-4 md:px-6 py-3 sm:py-4">
       <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
         <div className="w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-          <Cat className="w-5 h-5 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary-foreground" />
+          <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center">
+            <img
+              src={catIcon}
+              alt="Cat logo"
+              className="w-12 h-12 object-contain pl-2"
+            />
+          </div>{" "}
         </div>
         <div className="flex flex-col leading-tight min-w-0">
           <h1 className="font-bold text-base sm:text-xl md:text-2xl lg:text-3xl text-foreground break-words">
